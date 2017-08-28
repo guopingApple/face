@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //根据不包含引用对象的普通数组深拷贝得到启发，不拷贝引用对象，
+        //拷贝一个字符串会新辟一个新的存储地址，这样就切断了引用对象的指针联系。
+        
+        //parse用于从一个字符串中解析出json对象
+        //stringify()用于从一个对象解析出字符串
+       (function () {
+            let test={
+                a:"ss",
+                b:"dd",
+                c:[
+                    {dd:"css",ee:"cdd"},
+                    {mm:"ff",nn:"ee"}
+                ]
+            };
+            let stringify = JSON.stringify(test);
+            console.log( stringify );
+
+            let parse = JSON.parse( stringify );
+            console.log( parse );
+
+            console.log( test === parse ); //false
+
+            parse.c.dd = 'newdd';
+            console.log(parse.c.dd);// newdd
+            console.log(test.c[0].dd);// css
+
+       })();
+    </script>
+</body>
+</html> 

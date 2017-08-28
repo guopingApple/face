@@ -5,4 +5,5 @@
 3.数组去重<br>
 4.slice/splice<br>
 5.call/apply/bind<br>
-6.a b 交换
+6.a b 交换<br>
+7.使用JSON.parse(),JSON.stringify()实现对对象的深拷贝
