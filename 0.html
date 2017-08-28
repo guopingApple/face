@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function A(){};
+			function B(){};
+			A.prototype = { fun:function(){}}; //原型就是对象
+			
+			var a = new A();
+			console.log(a.constructor === A);//false 查看对象的构造函数
+			console.log(A.prototype.constructor === A); //false
+			console.log(a.hasOwnProperty('constructor')); //false
+			console.log(a instanceof A);//true
+			
+			A.prototype = new B();
+			var b = new A();
+			console.log(b.constructor === A);//false
+			console.log(B.prototype.constructor===A);//false
+			console.log(B.constructor.prototype.constructor===A);//false
+			console.log(b.hasOwnProperty('constructor'));//false
+			console.log(b instanceof A);//true
+			console.log(b instanceof B);//true  是否在同一个原型链上
+			
+			
+			var b = {x:4};
+			function fn2(o){
+				this.x = o.x;
+			}
+			fn2.prototype = {
+				init:function(){
+					return this.x;
+				}
+			}
+			var fn3 = new fn2({x:5});
+			console.log(fn3.init());//5
+			console.log(fn3.init === fn2.init)//false
+			console.log(fn3.init.call(b));//4
+			var c = fn3.init;
+			console.log(c());//undefined
+			
+			setTimeout(function(){
+				console.log(1);
+			},0)
+			new Promise(function(resolve){
+				console.log(2);
+				for(var i=0;i<10;i++){
+					i===9 && resolve();
+				}
+				console.log(3);
+			}).then(function(){
+				console.log(4);
+			})
+			console.log(5); // 2 3 5 4 1
+			
+		</script>
+	</body>
+</html>
