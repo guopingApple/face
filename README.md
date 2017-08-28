@@ -4,4 +4,5 @@
 2.斐波那契数列（Fibonacci Sequence）<br>
 3.数组去重<br>
 4.slice/splice<br>
-5.call/apply/bind
+5.call/apply/bind<br>
+6.a b 交换
