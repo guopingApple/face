@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+       (function () {
+           function Person(name,age) { // this == obj
+               this.name = name;
+               this.age = age;
+           }
+           
+           obj = { };
+
+           let person = new Person('Apple',29);
+           console.log(person.constructor === Person); // true
+           
+           Person.prototype = { fun: function() {}}
+           let p = new Person();
+           console.log(p.constructor === Person); //false //ƒ Object() { [native code] }
+           
+           //call 继承
+           Person.call(obj,'apple',30); 
+           console.log(obj);//{name:"apple",age:30}
+           
+           //call(this,a,b,c)
+           //apply(this,[a,b,c]) 
+           //都是改变this指向,传参列表不同.
+
+           function Student(name,age,sex,tel){
+                Person.call(this,name,age);
+                // Person.apply(this,[name,age]);
+                this.sex = sex;
+                this.tel = tel;
+           }
+           var stu = new Student('Apple','30','女','15910527266');
+           console.log(stu);//Student{name:"Apple",age:"30",sex:"女"，tel:"15910527266"}
+
+       })();
+
+        //求一个数列组内最大数值
+        (function(){
+           let arr = [2,23,4,88,2,5,6,7,89];
+           let max = Math.max.apply(Math,arr);
+           console.log(max);//89
+        })();
+        
+        //字符串长度
+        //unicode > 255 / <=255
+        //charCodeAt() 返回字符串中字符的 Unicode 编码
+        (function(){
+            function bytesLen(str) {
+                // console.log(str.length);
+                var count = str.length;
+                for (let index = 0; index < str.length; index++) {
+                    if (str.charCodeAt(index) > 255) {
+                        count++ ;
+                    }                    
+                }
+                return count;
+            }
+            var str = 'abcdefgp郭萍';
+            console.log(bytesLen(str));//12
+        })();
+
+    </script>
+</body>
+</html>
