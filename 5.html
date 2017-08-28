@@ -30,11 +30,15 @@
            
            //call(this,a,b,c)
            //apply(this,[a,b,c]) 
+           //bind(this,a,b,c)()
            //都是改变this指向,传参列表不同.
+           //call和apply都是对函数的直接调用，
+           //而bind方法返回的仍然是一个函数，因此后面还需要()来进行调用才可以.
 
            function Student(name,age,sex,tel){
-                Person.call(this,name,age);
+                // Person.call(this,name,age);
                 // Person.apply(this,[name,age]);
+                Person.bind(this,name,age)();
                 this.sex = sex;
                 this.tel = tel;
            }
